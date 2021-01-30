@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def self.match(fieldname,searchstring)
   	where("#{fieldname} like ?","%#{searchstring}%")
   end
+
+  def except_current_user(users)
+  	users.reject { |user| user.id==self.id }
+  end
 end

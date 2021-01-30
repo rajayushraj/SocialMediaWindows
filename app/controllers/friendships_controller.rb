@@ -34,8 +34,26 @@ class FriendshipsController < ApplicationController
 		end
 	end
 	def search
-		@user=User.find_by(fname:params[:friend])
-		render 'users/search'
+		if params[:friend].present?
+			@friends=User.search(params[:friend])
+			@friends=current_user.except_current_user(@friends)
+			if @friends.present?
+				respond_to do |format|
+					format.js { render partial: 'users/result'}
+				end
+			else
+				respond_to do |format|
+					flash[:notice]="No user Present"
+					byebug
+					format.js { render partial: 'users/result'}
+				end
+			end
+		else
+			respond_to do |format|
+				flash[:notice]="No user Present"
+				format.js { render partial: 'users/result'}
+			end
+		end
 	end
 
 	def destroy

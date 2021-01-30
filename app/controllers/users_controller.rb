@@ -6,4 +6,7 @@ class UsersController < ApplicationController
 		@user=User.find(params[:id])
 		@friendsrequest=@user.friend_request
 	end
+	def search
+		
+	end
 end
