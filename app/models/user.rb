@@ -23,4 +23,16 @@ class User < ApplicationRecord
   def full_name
   	"#{fname} #{lname}"
   end
+
+  def self.search(searchstring)
+  	searchstring.strip!
+  	@first=match('email',searchstring)
+  	@second=match('fname',searchstring)
+  	@third=match('lname',searchstring)
+  	(@first+@second+@third).uniq
+  end
+
+  def self.match(fieldname,searchstring)
+  	where("#{fieldname} like ?","%#{searchstring}%")
+  end
 end
