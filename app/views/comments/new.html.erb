@@ -1,0 +1,13 @@
+<h1>Comment create karo</h1>
+<%= form_with(scope: :comment,url: post_comments_path ,local: true) do |f| %>
+
+
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_field :content, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "add comment" %>
+  </div>
+<% end %>

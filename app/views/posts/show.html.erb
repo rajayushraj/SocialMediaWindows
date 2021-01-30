@@ -1,0 +1,10 @@
+<h1>Post show page </h1>
+<p><%= @post.description %></p>
+<p><%= @post.user_id %>
+<br>
+<p>Total comments: <%= @post.comments.count %> Total Likes: <%= @post.likes.count %> <%= link_to 'Create comment',
+new_post_comment_path(@post) %> <%= link_to 'Like', post_likes_path(@post),method: :POST %></p>
+<br>
+
+<br>
+<%= link_to "delete_post", post_path, method: :delete, data: {confirm: "are you sure"} %>

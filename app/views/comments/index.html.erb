@@ -1,0 +1,4 @@
+<h3>All comments on post id:<%= @post.id %></h3>
+<% @comments.each do |current_comment| %>
+	<p> Comment_by_User <%= current_comment.user.id %>  <%=current_comment.content %></p>
+<% end %>
