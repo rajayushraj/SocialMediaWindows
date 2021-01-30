@@ -39,4 +39,14 @@ class User < ApplicationRecord
   def except_current_user(users)
   	users.reject { |user| user.id==self.id }
   end
+
+  def not_friends_with?(id_of_friend)
+  	@ff=Friendship.find_by(receiver_id:self.id,sender_id:id_of_friend,status: true)
+  	@gg=Friendship.find_by(receiver_id:id_of_friend,sender_id:self.id,status: true)
+  	if @gg.present? or @ff.present?
+  		return false
+  	else
+  		return true
+  	end
+  end
 end
