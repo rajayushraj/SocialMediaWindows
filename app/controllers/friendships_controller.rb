@@ -33,6 +33,10 @@ class FriendshipsController < ApplicationController
 			redirect_to my_friends_path
 		end
 	end
+	def search
+		@user=User.find_by(fname:params[:friend])
+		render 'users/search'
+	end
 
 	def destroy
 		@send=User.find(params[:user_id])
