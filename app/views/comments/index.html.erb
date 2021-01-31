@@ -3,7 +3,7 @@
 	<p> 
 		Comment_by_User <%= current_comment.user.id %>  <%=current_comment.content %>
 		<% if can? :destroy,current_comment %>
-			<%= link_to 'Delete Comment',post_comment_path(@post,current_comment) %>
+			<%= link_to 'Delete Comment',post_comment_path(@post,current_comment),method: :delete %>
 		<% end %>
 	</p>
 <% end %>
