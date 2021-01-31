@@ -1,10 +1,2 @@
-<%= form_with(model: @post, local: true) do |f| %>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description, autofocus: true, autocomplete: "description" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "create post" %>
-  </div>
-<% end %>
+<h1>Create Post</h1>
+<%= render 'form' %>

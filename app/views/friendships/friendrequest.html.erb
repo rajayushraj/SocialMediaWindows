@@ -6,6 +6,6 @@
 	<% @friendsrequest.each do |currentsender| %>
 		<p>User Name :<%= currentsender.full_name %>
 			<%= link_to 'Accept', user_friendrequests_path(currentsender),method: :post %>
-			<%= link_to 'Decline', user_friendship_path(currentsender,current_user),method: :delete %>
+			<%= link_to 'Decline', user_friendship_path(currentsender,current_user),method: :delete,data: {confirm: "are you sure"} %>
 	<% end %>
 </p>

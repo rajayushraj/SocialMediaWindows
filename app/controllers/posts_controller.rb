@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 	end
 	def create
 		@post = Post.new(post_params) 
-    @post.user = current_user
+    @post.user = current_user 
     if @post.save 
       flash[:notice] = "Post was created successfully." 
       redirect_to @post
@@ -19,6 +19,15 @@ class PostsController < ApplicationController
       render 'new' 
     end
 
+	end
+	def edit
+		@post=Post.find(params[:id])
+	end
+
+	def update
+		@post=Post.find(params[:id])
+		@post.update(post_params)
+		redirect_to @post
 	end
 	def destroy
 		@post=Post.find(params[:id])
@@ -30,5 +39,5 @@ class PostsController < ApplicationController
 
 	def post_params
     params.require(:post).permit(:description)
-   end
+  end
 end
