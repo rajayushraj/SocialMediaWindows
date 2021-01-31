@@ -3,6 +3,7 @@ class FriendshipsController < ApplicationController
 		@rec=User.find(params[:user_id])
 		@ff=Friendship.find_by(sender_id:current_user,receiver_id:@rec,status:false)
 		if @ff
+			flash[:notice]="You have already send friendrequest"
 			redirect_to root_path
 		else
 			@friendrequest=Friendship.new
