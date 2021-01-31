@@ -3,4 +3,5 @@
 <p><%= link_to 'sign-out', destroy_user_session_path,method: :delete %></p>
 <p><%= link_to 'edit your profile', edit_user_registration_path(current_user) %></p>
 <p><%= link_to 'Create New Post', new_post_path %></p>
-<p><%= link_to 'Show all fRiends',my_friends_path %></p>
+<p><%= link_to 'Show all friends',my_friends_path %></p>
+<p><%= link_to 'Show all friendrequest',user_friendrequests_path(current_user) %></p>

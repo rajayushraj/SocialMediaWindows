@@ -14,5 +14,4 @@ Rails.application.routes.draw do
   get 'friendship_search',to: 'friendships#search',as: 'friendship_search'
   get 'users/:id/friendrequest', to:'friendships#friendrequest',as: 'user_friendrequests'
   post 'users/:id/friendrequest', to:'friendships#accept'
-
 end

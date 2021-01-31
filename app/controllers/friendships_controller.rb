@@ -19,6 +19,7 @@ class FriendshipsController < ApplicationController
 	end
 
 	def friendrequest
+		@friendsrequest=current_user.friend_request
 	end
 
 	def accept

@@ -5,12 +5,4 @@
 <% if @user.id != current_user.id %>
 	<p> this user is not current user</p>
 	<%= link_to 'Send Friend requst', user_friendships_path(@user),method: :post %>
-<% else %>
-	<p> All request received by you </p>
-	<% @friendsrequest.each do |currentsender| %>
-		<p>User Name :<%= currentsender.full_name %>
-			<%= link_to 'Accept', user_friendrequests_path(currentsender),method: :post %>
-			<%= link_to 'Decline', user_friendship_path(currentsender,current_user),method: :delete %>
-		</p>
-	<% end %>
 <% end %>
