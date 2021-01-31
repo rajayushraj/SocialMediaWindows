@@ -3,8 +3,12 @@
 <p><%= @post.user_id %>
 <br>
 <p>Total comments: <%= @post.comments.count %> Total Likes: <%= @post.likes.count %> <%= link_to 'Create comment',
-new_post_comment_path(@post) %> <%= link_to 'Like', post_likes_path(@post),method: :POST %></p>
+	new_post_comment_path(@post) %> <%= link_to 'Like', post_likes_path(@post),method: :POST %>
+	<%= link_to 'Show all comments',post_comments_path(@post) %>
+</p>
 <br>
 
 <br>
-<%= link_to "delete_post", post_path, method: :delete, data: {confirm: "are you sure"} %>
+<% if can? :destroy,@post %>
+	<%= link_to "delete_post", post_path, method: :delete, data: {confirm: "are you sure"} %>
+<% end %>

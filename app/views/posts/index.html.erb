@@ -1,5 +1,12 @@
 <h1>This page shows all posts of Current User</h1>
 <% @posts.each do |p| %>
-   <p><%= p.description %> <%=link_to 'Edit Post',edit_post_path(p) %>  <%= link_to 'Delete',post_path(p),method: :delete,data: {confirm: "are you sure"} %></p>
+   <p><%= p.description %>
+   	<% if can? :update,p %>
+    	<%=link_to 'Edit Post',edit_post_path(p) %>
+   	<% end %>
+   	<% if can? :destroy,p %>  
+    	<%= link_to 'Delete',post_path(p),method: :delete,data: {confirm: "are you sure"} %>
+    <% end %>
+    </p>
 <% end %>
 
