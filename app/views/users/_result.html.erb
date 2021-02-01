@@ -3,9 +3,9 @@
 		<p>Name:<%= friend.full_name %> email:<%= friend.email %>
 		 <% if current_user.not_friends_with?(friend.id) %>
 		 		SendFriendRequest:<%= link_to 'Send',user_friendships_path(friend),method: :post  %>
-		 	<% else %>
+		 <% else %>
 		 		already friends
-		 	<% end %>		
+		 <% end %>		
 		</p>
 	<% end %>
 <% end %>

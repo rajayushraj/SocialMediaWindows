@@ -46,7 +46,6 @@ class FriendshipsController < ApplicationController
 			else
 				respond_to do |format|
 					flash[:notice]="No user Present"
-					byebug
 					format.js { render partial: 'users/result'}
 				end
 			end
@@ -61,8 +60,14 @@ class FriendshipsController < ApplicationController
 	def destroy
 		@send=User.find(params[:user_id])
 		@rec=User.find(params[:id])
-		@ff=Friendship.find_by(sender_id:@send,receiver_id:@rec,status:false)
-		@ff.destroy
-		redirect_to @rec
+		@ff=Friendship.find_by(sender_id:@send,receiver_id:@rec,status:true)
+		@gg=Friendship.find_by(sender_id:@rec,receiver_id:@send,status:true)
+		if @ff
+			@ff.destroy
+			redirect_to my_friends_path
+		else
+			@gg.destroy
+			redirect_to my_friends_path
+		end
 	end
 end

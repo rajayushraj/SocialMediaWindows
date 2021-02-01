@@ -1,5 +1,5 @@
 <h1>All friends</h1>
 
 <% @friends.each do |current_friend| %>
-	<p> Friend name : <%= current_friend.full_name %> </p>
+	<p> Friend name : <%= current_friend.full_name %> Remove:<%= link_to 'RemoveFriend' ,user_friendship_path(current_user,current_friend),method: :delete %> </p>
 <% end %>

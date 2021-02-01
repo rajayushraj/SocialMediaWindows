@@ -26,10 +26,12 @@ class User < ApplicationRecord
 
   def self.search(searchstring)
   	searchstring.strip!
-  	@first=match('email',searchstring)
-  	@second=match('fname',searchstring)
-  	@third=match('lname',searchstring)
-  	(@first+@second+@third).uniq
+  	#@first=match('email',searchstring)
+  	#@second=match('fname',searchstring)
+  	#@third=match('lname',searchstring)
+  	#(@first+@second+@third).uniq
+  	where("email like ?","%#{searchstring}%").or(where("fname like ?","%#{searchstring}%").or(where("lname like ?","%#{searchstring}%")))
+
   end
 
   def self.match(fieldname,searchstring)
@@ -43,10 +45,6 @@ class User < ApplicationRecord
   def not_friends_with?(id_of_friend)
   	@ff=Friendship.find_by(receiver_id:self.id,sender_id:id_of_friend,status: true)
   	@gg=Friendship.find_by(receiver_id:id_of_friend,sender_id:self.id,status: true)
-  	if @gg.present? or @ff.present?
-  		return false
-  	else
-  		return true
-  	end
+  	!(@gg.present? or @ff.present?)
   end
 end

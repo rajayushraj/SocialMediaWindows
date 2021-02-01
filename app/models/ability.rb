@@ -28,7 +28,7 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    can :update,Post do|post|
+    can :upd,Post do|post|
       post.user==user
     end
     can :destroy,Post do|post|

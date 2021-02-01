@@ -2,7 +2,7 @@
 <% if @posts %>
 	<% @posts.each do |p| %>
    	<p><%= p.description %>
-   			<% if can? :update,p %>
+   			<% if can? :upd,p %>
     			<%=link_to 'Edit Post',edit_post_path(p) %>
    			<% end %>
    			<% if can? :destroy,p %>  
@@ -15,7 +15,7 @@
 ----Friends Post------
 <% if @friends %>
 	<% @friends.each do |current_friend| %>
-		<% @posts=current_friend.posts %>
+		<% @posts=current_friend.posts.where(status:"Public").or(current_friend.posts.where(status:"Public")) %>
 		<% if @posts %>
 				<% @posts.each do |curr_post| %>
 					<p>User:<%= curr_post.user.full_name %> Description:<%= curr_post.description %> <%= link_to 'Show',post_path(curr_post)%></p>

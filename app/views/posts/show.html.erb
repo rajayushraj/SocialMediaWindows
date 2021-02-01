@@ -3,7 +3,7 @@
 <p><%= @post.user_id %>
 <br>
 <p>Total comments: <%= @post.comments.count %> Total Likes: <%= @post.likes.count %> <%= link_to 'Create comment',
-	new_post_comment_path(@post) %> <%= link_to 'Like', post_likes_path(@post),method: :POST %>
+	new_post_comment_path(@post) %> <%= link_to 'Like', post_likes_path(@post),method: :POST,remote: true %>
 	<%= link_to 'Show all comments',post_comments_path(@post) %>
 </p>
 <br>
