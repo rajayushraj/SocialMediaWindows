@@ -43,8 +43,8 @@ class User < ApplicationRecord
   end
 
   def not_friends_with?(id_of_friend)
-  	@ff=Friendship.find_by(receiver_id:self.id,sender_id:id_of_friend,status: true)
-  	@gg=Friendship.find_by(receiver_id:id_of_friend,sender_id:self.id,status: true)
-  	!(@gg.present? or @ff.present?)
+  	@ff=Friendship.where(receiver_id:self.id,sender_id:id_of_friend,status: true).or(Friendship.where(receiver_id:id_of_friend,sender_id:self.id,status: true))
+  	#@gg=Friendship.find_by(receiver_id:id_of_friend,sender_id:self.id,status: true)
+  	!@ff.present?
   end
 end

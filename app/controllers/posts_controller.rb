@@ -3,12 +3,16 @@ class PostsController < ApplicationController
 	def index
 		@posts=current_user.posts
 		@friends=current_user.all_friends
+		@friends.each do|current_friend|
+			@posts+= current_friend.posts.where(status:"Public").or(current_friend.posts.where(status:"Friend")) 
+		end
 	end
 	def new
 		@post=Post.new
 	end
 	def show
 		@post=Post.find(params[:id])
+		authorize! :read,@post
 	end
 	def create
 		@post = Post.new(post_params) 

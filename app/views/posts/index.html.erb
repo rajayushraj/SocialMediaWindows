@@ -1,7 +1,7 @@
-<h1>This page shows all posts of Current User</h1>
+<h1>Timeline!!! </h1>
 <% if @posts %>
 	<% @posts.each do |p| %>
-   	<p><%= p.description %>
+   	<p>Created_by: <%=p.user.full_name %> Content:<%= p.description %>
    			<% if can? :upd,p %>
     			<%=link_to 'Edit Post',edit_post_path(p) %>
    			<% end %>
@@ -12,17 +12,7 @@
   	</p>
 	<% end %>
 <% end %>
-----Friends Post------
-<% if @friends %>
-	<% @friends.each do |current_friend| %>
-		<% @posts=current_friend.posts.where(status:"Public").or(current_friend.posts.where(status:"Public")) %>
-		<% if @posts %>
-				<% @posts.each do |curr_post| %>
-					<p>User:<%= curr_post.user.full_name %> Description:<%= curr_post.description %> <%= link_to 'Show',post_path(curr_post)%></p>
-				<% end %>
-		<% end %>
-	<% end %>
-<% end %>
+<br>
 
 
 

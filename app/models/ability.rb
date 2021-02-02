@@ -37,5 +37,19 @@ class Ability
     can :destroy,Comment do|comment|
       comment.user==user
     end
+    can :read,Post do |post|
+      if post.user==user
+        true
+      else
+        if post.status=="Public"
+          true
+        elsif post.status=="Private"
+          user==post.user
+        else
+          !(user.not_friends_with?(post.user.id))
+        end
+      end
+    end
+
   end
 end
