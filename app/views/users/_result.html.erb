@@ -1,11 +1,7 @@
 <% if @friends %>
 	<% @friends.each do |friend| %>
 		<p>Name:<%= friend.full_name %> email:<%= friend.email %>
-		 <% if current_user.not_friends_with?(friend.id) %>
-		 		SendFriendRequest:<%= link_to 'Send',user_friendships_path(friend),method: :post  %>
-		 <% else %>
-		 		already friends
-		 <% end %>		
+		 		SendFriendRequest:<%= link_to 'Send',user_friendships_path(friend),method: :post  %>		
 		</p>
 	<% end %>
 <% end %>

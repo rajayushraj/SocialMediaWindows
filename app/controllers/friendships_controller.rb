@@ -37,8 +37,10 @@ class FriendshipsController < ApplicationController
 	end
 	def search
 		if params[:friend].present?
-			@friends=User.search(params[:friend])
-			@friends=current_user.except_current_user(@friends)
+			@friends=User.search(params[:friend],current_user.id)
+			@allfriends=current_user.all_friends
+			@friends=@friends.where.not(id:@allfriends)
+			#@friends=current_user.except_current_user(@friends)
 			if @friends.present?
 				respond_to do |format|
 					format.js { render partial: 'users/result'}
@@ -60,14 +62,8 @@ class FriendshipsController < ApplicationController
 	def destroy
 		@send=User.find(params[:user_id])
 		@rec=User.find(params[:id])
-		@ff=Friendship.find_by(sender_id:@send,receiver_id:@rec,status:true)
-		@gg=Friendship.find_by(sender_id:@rec,receiver_id:@send,status:true)
-		if @ff
-			@ff.destroy
-			redirect_to my_friends_path
-		else
-			@gg.destroy
-			redirect_to my_friends_path
-		end
+		@ff=Friendship.where(sender_id:@send,receiver_id:@rec,status:true).or(Friendship.where(sender_id:@rec,receiver_id:@send,status:true)).first
+		@ff.destroy
+		redirect_to my_friends_path
 	end
 end

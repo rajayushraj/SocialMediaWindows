@@ -24,14 +24,15 @@ class User < ApplicationRecord
   	"#{fname} #{lname}"
   end
 
-  def self.search(searchstring)
+  def self.search(searchstring,reject_id)
   	searchstring.strip!
   	#@first=match('email',searchstring)
   	#@second=match('fname',searchstring)
   	#@third=match('lname',searchstring)
   	#(@first+@second+@third).uniq
-  	where("email like ?","%#{searchstring}%").or(where("fname like ?","%#{searchstring}%").or(where("lname like ?","%#{searchstring}%")))
-
+  	@allsearchresult=where("email like ?","%#{searchstring}%").or(where("fname like ?","%#{searchstring}%").or(where("lname like ?","%#{searchstring}%")))
+  	@allsearchresult=@allsearchresult.where.not(id:reject_id)
+  	@allsearchresult
   end
 
   def self.match(fieldname,searchstring)
