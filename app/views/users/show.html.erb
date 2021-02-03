@@ -5,9 +5,19 @@
 <% if @user.id != current_user.id %>
 	<p> this user is not current user</p>
 	<p>Name:<%= @user.full_name %> Email:<%= @user.email %></p>
+	<% if @user.image.present? %>
+		<div style="width:400px;height:auto">
+			<%= image_tag(@user.image,style: 'width:100%') %>
+		</div>
+	<% end %>
 	<% if current_user.not_friends_with?(@user.id) %>
 		<%= link_to 'Send Friend request', user_friendships_path(@user),method: :post %>
 	<% end %>
 <% else %>
 	<p>Name:<%= @user.full_name %> Email:<%= @user.email %></p>
+	<% if @user.image.present? %>
+		<div style="width:400px;height:auto">
+			<%= image_tag(@user.image,style: 'width:100%') %>
+		</div>
+	<% end %>
 <% end %>
